@@ -4,6 +4,8 @@
 	interface BasicProps {
 		children: Snippet;
 		isSecondary?: boolean;
+		isFullWidth?: boolean;
+		icon?: string;
 	}
 
 	interface ButtonProps extends BasicProps {
@@ -19,16 +21,27 @@
 
 	type ComponentProps = ButtonProps | LinkProps;
 
-	let { children, href, onclick, isSecondary, ...props }: ComponentProps = $props();
+	let { children, href, onclick, isSecondary, isFullWidth, icon, ...props }: ComponentProps =
+		$props();
 </script>
 
 {#if href}
-	<a {href} class="btn" class:btn-secondary={isSecondary}>
+	<a {href} class="btn" class:btn-secondary={isSecondary} class:btn-full={isFullWidth}>
 		{@render children()}
 	</a>
 {:else}
-	<button {...props} {onclick} class="btn" class:btn-secondary={isSecondary}>
-		{@render children()}
+	<button
+		{...props}
+		{onclick}
+		class="btn"
+		class:btn-secondary={isSecondary}
+		class:btn-full={isFullWidth}
+	>
+		{#if icon}
+			<img src={icon} alt="icon" class="icon" />
+		{/if}
+
+		<p>{@render children()}</p>
 	</button>
 {/if}
 
@@ -50,21 +63,24 @@
 		border-radius: 12px;
 		color: white;
 		font-weight: normal;
-		font-size: 22px;
+		font-size: 20px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 8px;
 	}
 
 	.btn-secondary {
-		background-color: white;
-		color: black;
-		border: 1px solid black;
+		background-color: transparent;
+		color: white;
+		border: 1px solid white;
 	}
 
-	.btn-danger {
-		background-color: rgb(136, 4, 4);
+	.btn-full {
+		width: 100%;
 	}
 
-	.btn-menu {
-		min-width: 150px;
-		padding: 8px 20px;
+	.icon {
+		margin-right: 16px;
 	}
 </style>
