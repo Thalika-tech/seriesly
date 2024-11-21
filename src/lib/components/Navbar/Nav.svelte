@@ -3,8 +3,16 @@
 	import Icon from '@iconify/svelte';
 
 	import { getUserState } from '$lib/state/user-state.svelte';
+  import { goto } from '$app/navigation';
 	let userContext = getUserState();
 	// let { user } = $derived(userContext);
+
+	let activePage = $state("myshows")
+
+	const changeTab = (value: string) => {
+		activePage = value;
+		goto(`/private/${value}`);
+	}
 </script>
 
 <nav>
@@ -12,13 +20,13 @@
 		<img src={Logo} alt="logo" />
 	</a>
 	<ul>
-		<li><a href="/private/dashboard">My Shows</a></li>
-		<li><a href="/private/dashboard">All Shows</a></li>
-		<li><a href="/private/dashboard">New & Popular</a></li>
+		<li><button onclick={() => changeTab("myshows")} class="nav_btn" class:nav_btn_select={activePage === "myshows"}>My Shows</button></li>
+		<li><button onclick={() => changeTab("allshows")} class="nav_btn" class:nav_btn_select={activePage === "allshows"}>All Shows</button></li>
+		<li><button onclick={() => changeTab("newshows")} class="nav_btn" class:nav_btn_select={activePage === "newshows"}>New & Popular</button></li>
 	</ul>
 	<!-- <p>{user?.email}</p> -->
 	<button onclick={() => userContext.logout()}
-	><Icon icon="material-symbols:logout-rounded" width="32" height="32" /></button>
+	class="icon_btn"><Icon icon="material-symbols:logout-rounded" width="32" height="32" /></button>
 </nav>
 
 <style>
@@ -38,11 +46,24 @@
 		font-size: 20px;
 	}
 
-	button {
+	.icon_btn {
 		background-color: transparent;
 		border: none;
 		color: white;
 		cursor: pointer;
 		margin: auto 0px auto auto;
+		
+	}
+
+	.nav_btn {
+		font-size: 20px;
+		background-color: transparent;
+		border: none;
+		color: white;
+		cursor: pointer;
+	}
+
+	.nav_btn_select{
+		font-weight: bold;
 	}
 </style>
