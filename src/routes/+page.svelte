@@ -1,7 +1,7 @@
-<script>
-	import Button from '$lib/components/Button/+Button.svelte';
-</script>
+<script lang="ts">
+  import Button from '$components/Button/Button.svelte';
 
+</script>
 <h1 class="title">Take Your <br /> Series Seriously</h1>
 
 <p class="subtitle">

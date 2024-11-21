@@ -45,7 +45,7 @@
 	</button>
 {/if}
 
-<style lang="scss">
+<style>
 	a {
 		display: block;
 		text-decoration: none;
@@ -68,6 +68,8 @@
 		justify-content: center;
 		align-items: center;
 		gap: 8px;
+		cursor: pointer;
+		border: none;
 	}
 
 	.btn-secondary {

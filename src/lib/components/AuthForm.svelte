@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ActionData } from '../../routes/register/$types';
-	import Button from './Button/+Button.svelte';
+	import Button from './Button/Button.svelte';
 
 	interface ComponentProps {
 		isRegistration: boolean;
