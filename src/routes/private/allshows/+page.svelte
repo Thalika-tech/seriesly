@@ -29,6 +29,13 @@
 		filteredShows = shows.filter((show: any) => show.name.toLowerCase().includes(inputValue.toLowerCase()));
 	};
 
+	const remove = (show: any) => {
+		// I need to fix this issue
+		filteredShows = filteredShows.map((allShow: any) =>
+			(allShow.id).toString() == show.id ? { ...allShow, image: { medium: show.image } } : allShow
+		);
+	}
+
 </script>
 
 <div class="layout">
@@ -39,7 +46,7 @@
 
 	<div class="grid">
 		{#each filteredShows as show}
-			<Card show={show}/>
+			<Card show={show} remove={remove}/>
 		{/each}
 	</div>
 </div>

@@ -13,7 +13,7 @@
 		<div class="grid">
 			{#if userShows.length > 0}
 				{#each userShows as show}
-					<Card show={show}/>
+					<Card show={show} />
 				{/each}
 
 			{:else}
@@ -29,8 +29,9 @@
 
 	.grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-  		gap: 24px; 
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		gap: 32px; 
+		justify-items: center;
 	}
 
 	.title {

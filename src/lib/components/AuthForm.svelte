@@ -43,20 +43,19 @@
 			{/if}
 			<Button type="submit" isFullWidth={true}>{isRegistration ? 'Sign Up' : 'Login'}</Button>
 		</form>
+	
+		<div class="divider">
+			<hr class="line" />
+			<p style="color: grey; margin: 0 10px;">OR</p>
+			<hr class="line" />
+		</div>
 
-		{#if !isRegistration}
-			<div class="divider">
-				<hr class="line" />
-				<p style="color: grey; margin: 0 10px;">OR</p>
-				<hr class="line" />
-			</div>
-
-			<form method="POST" action={isRegistration ? '/login/?/googleLogin' : '?/googleLogin'}>
-				<Button type="submit" isFullWidth={true} isSecondary={true} icon="/src/assets/google.png"
-					>Login with Google</Button
-				>
-			</form>
-		{/if}
+		<form method="POST" action={isRegistration ? '/login/?/googleLogin' : '?/googleLogin'}>
+			<Button type="submit" isFullWidth={true} isSecondary={true} icon="/src/assets/google.png"
+				>Login with Google</Button
+			>
+		</form>
+	
 
 		{#if isRegistration}
 			<p class="helper">Already have an account? <a href="/login">Log In</a></p>
@@ -69,7 +68,7 @@
 <style>
 	.card {
 		width: 400px;
-		margin: auto;
+		margin: auto auto 60px auto;
 	}
 
 	.title {

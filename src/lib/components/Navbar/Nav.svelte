@@ -1,14 +1,14 @@
 <script lang="ts">
 	import Logo from '$assets/logo.png';
 	import Icon from '@iconify/svelte';
-
+	import { page } from '$app/stores';
 	import { getUserState } from '$lib/state/user-state.svelte';
   	import { goto } from '$app/navigation';
 
 	let userContext = getUserState();
-	// let { user } = $derived(userContext);
 
-	let activePage = $state("")
+	let currentUrl = $page.url.href;
+	let activePage = $state(currentUrl.slice(currentUrl.lastIndexOf("/")+1, currentUrl.length))
 
 	const changeTab = (value: string) => {
 		activePage = value;
@@ -17,7 +17,7 @@
 </script>
 
 <nav>
-	<a href="/">
+	<a href="/private/myshows">
 		<img src={Logo} alt="logo" />
 	</a>
 	<ul>

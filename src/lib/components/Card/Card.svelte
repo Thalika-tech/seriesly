@@ -1,14 +1,15 @@
 <script lang="ts">
 	import { getUserState } from '$lib/state/user-state.svelte';
+	import Icon from '@iconify/svelte';
 
 	interface CardProps {
 		show: any;
+		remove?: (show: any) => void;
 	}
-
-	import Icon from '@iconify/svelte';
-	let { show }: CardProps = $props();
-
+	
+	let { show, remove }: CardProps = $props();
 	let userContext = getUserState();
+
 
 	// Add or remove show to your list
 	const handleLikeClick = (event: any, show: any) => {
@@ -16,14 +17,20 @@
 		event.stopPropagation();
 
 		if(show.image.medium === undefined){
-			userContext.removeShow(show);
+			async () => {
+				await userContext.removeShow(show).then(() => {
+					if(remove){
+						remove(show);
+					}
+				})
+			}
 		}else{
 			userContext.addShows(show);
 		}
 	}
 </script>
 
-<a href={`/private/${show.id}`}>
+<!-- <a href={`/private/${show.id}`}> -->
 	<div class="card">
 		<img src={show.image.medium === undefined ? show.image : show.image.medium } alt="img" />
 		<div class="title_div">
@@ -37,7 +44,7 @@
 			</button>
 		</div>
 	</div>
-</a>
+<!-- </a> -->
 
 <style>
 	.card {

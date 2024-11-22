@@ -84,6 +84,8 @@ export class UserState {
 
     const { error } = await this.supabase.from("liked_shows").delete().eq("id", selectedShow.id).eq("user_id", this.user.id);
 
+    console.log("REMOVED");
+
     if (error) {
       console.log("Error removing show");
       console.log(error);
