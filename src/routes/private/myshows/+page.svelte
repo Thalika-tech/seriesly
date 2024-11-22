@@ -1,14 +1,24 @@
 <script lang="ts">
 	import Card from '$components/Card/Card.svelte';
+  	import { getUserState } from '$lib/state/user-state.svelte';
 
+	let userContext = getUserState();
+	let { userShows } = $derived(userContext);
+
+	$inspect(userShows)
 </script>
 
 <div class="layout">
 	<h1 class="title">My Shows</h1>
 		<div class="grid">
-			<!-- {#each shows as show}
-				<Card show={show}/>
-			{/each} -->
+			{#if userShows.length > 0}
+				{#each userShows as show}
+					<Card show={show}/>
+				{/each}
+
+			{:else}
+				<p>No Shows Added</p>
+			{/if}
 		</div>
 </div>
 
@@ -25,5 +35,9 @@
 
 	.title {
 		margin-bottom: 24px;
+	}
+
+	p {
+		font-size: 24px;
 	}
 </style>

@@ -62,7 +62,7 @@ export const actions = {
 
     // Select table from superbase - reference supabase docs
     const userId = data.user.id;
-    await supabase.from("user_names").insert([{ user_id: userId, username }]);
+    await supabase.from("user_shows").insert([{ user_id: userId, username }]);
 
     redirect(303, "/private/myshows");
   },

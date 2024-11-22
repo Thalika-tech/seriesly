@@ -1,18 +1,40 @@
 <script lang="ts">
+	import { getUserState } from '$lib/state/user-state.svelte';
+
 	interface CardProps {
 		show: any;
 	}
 
 	import Icon from '@iconify/svelte';
 	let { show }: CardProps = $props();
+
+	let userContext = getUserState();
+
+	// Add or remove show to your list
+	const handleLikeClick = (event: any, show: any) => {
+		event.preventDefault();
+		event.stopPropagation();
+
+		if(show.image.medium === undefined){
+			userContext.removeShow(show);
+		}else{
+			userContext.addShows(show);
+		}
+	}
 </script>
 
-<a href="/">
+<a href={`/private/${show.id}`}>
 	<div class="card">
-		<img src={show.image.medium} alt="img" />
+		<img src={show.image.medium === undefined ? show.image : show.image.medium } alt="img" />
 		<div class="title_div">
 			<h4>{show.name}</h4>
-			<button><Icon icon="icon-park-outline:like" width="24" height="24" class="icon"/></button>
+			<button onclick={(e) => handleLikeClick(e, show)}>
+				{#if show.image.medium === undefined}
+					<Icon icon="icon-park-solid:like" width="24" height="24" color="#ec644b"/>
+				{:else} 
+					<Icon icon="icon-park-outline:like" width="24" height="24" />
+				{/if}
+			</button>
 		</div>
 	</div>
 </a>
@@ -47,5 +69,10 @@
 		background-color: transparent;
 		border: none;
 		color: white;
+		cursor: pointer;
+		&:hover{
+			transform: scale(1.05);
+		}
 	}
+
 </style>

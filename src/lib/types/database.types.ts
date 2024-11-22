@@ -3,24 +3,54 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
-      user_names: {
+      liked_shows: {
         Row: {
           created_at: string;
           id: number;
-          username: string | null;
-          user_id: string | null;
+          show_id: string;
+          image: string;
+          name: string;
+          user_id: string;
         };
         Insert: {
           created_at?: string;
           id?: number;
-          username?: string | null;
-          user_id?: string | null;
+          show_id: string;
+          image: string;
+          name: string;
+          user_id?: string;
         };
         Update: {
           created_at?: string;
           id?: number;
+          show_id?: string;
+          image?: string;
+          name?: string;
+          user_id?: string;
+        };
+        Relationships: [];
+      };
+      user_shows: {
+        Row: {
+          created_at: string;
+          id: number;
+          shows: string[] | null;
+          user_id: string;
+          username: string | null;
+        };
+        Insert: {
+          created_at?: string;
+          id?: number;
+          shows?: string[] | null;
+          user_id?: string;
           username?: string | null;
-          user_id?: string | null;
+        };
+        Update: {
+          created_at?: string;
+          id?: number;
+          shows?: string[] | null;
+          user_id?: string;
+          username?: string | null;
         };
         Relationships: [];
       };

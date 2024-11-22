@@ -3,11 +3,12 @@
 	import Icon from '@iconify/svelte';
 
 	import { getUserState } from '$lib/state/user-state.svelte';
-  import { goto } from '$app/navigation';
+  	import { goto } from '$app/navigation';
+
 	let userContext = getUserState();
 	// let { user } = $derived(userContext);
 
-	let activePage = $state("myshows")
+	let activePage = $state("")
 
 	const changeTab = (value: string) => {
 		activePage = value;
@@ -22,7 +23,7 @@
 	<ul>
 		<li><button onclick={() => changeTab("myshows")} class="nav_btn" class:nav_btn_select={activePage === "myshows"}>My Shows</button></li>
 		<li><button onclick={() => changeTab("allshows")} class="nav_btn" class:nav_btn_select={activePage === "allshows"}>All Shows</button></li>
-		<li><button onclick={() => changeTab("newshows")} class="nav_btn" class:nav_btn_select={activePage === "newshows"}>New & Popular</button></li>
+		<!-- <li><button onclick={() => changeTab("newshows")} class="nav_btn" class:nav_btn_select={activePage === "newshows"}>New & Popular</button></li> -->
 	</ul>
 	<!-- <p>{user?.email}</p> -->
 	<button onclick={() => userContext.logout()}
