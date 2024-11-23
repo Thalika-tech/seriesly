@@ -17,12 +17,9 @@
 		event.stopPropagation();
 
 		if(show.image.medium === undefined){
-			async () => {
-				await userContext.removeShow(show).then(() => {
-					if(remove){
-						remove(show);
-					}
-				})
+			userContext.removeShow(show)
+			if(remove){
+				remove(show);
 			}
 		}else{
 			userContext.addShows(show);

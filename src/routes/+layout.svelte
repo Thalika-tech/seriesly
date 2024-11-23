@@ -4,7 +4,9 @@
 	import Placeholder from '$assets/placeholder.png';
 	import { invalidate } from '$app/navigation';
 	import { Navbar } from '$components';
-    import { setUserState } from "$lib/state/user-state.svelte";
+    import { getUserState, setUserState } from "$lib/state/user-state.svelte";
+
+
 
     let {children, data}  = $props();
     // Derived: anytime data changes, we want to update our session, supabase and user proprty
@@ -19,10 +21,12 @@
 			if (newSession?.expires_at !== session?.expires_at) {
 				invalidate('supabase:auth');
 			}
+			
 		});
 
 		return () => data.subscription.unsubscribe();
     });
+	console.log(data)
 
 </script>
 

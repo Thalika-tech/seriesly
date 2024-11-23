@@ -11,15 +11,19 @@
 	let filteredShows = $state(shows);
 	
 	$effect(() => {
-		// svelte-ignore state_referenced_locally
-		filteredShows.map((show: any) => {
-			userShows.map((userShow) => {
-				if(userShow.show_id == show.id){
-					show.image = userShow.image
-				}
+
+			$: userShows;
+			// svelte-ignore state_referenced_locally
+			filteredShows.map((show: any) => {
+				userShows.map((userShow) => {
+					if(userShow.show_id == show.id){
+						show.image = userShow.image
+					}
+				})
 			})
-		})
+	
 	})
+		
 
 
 	let inputValue = $state("");
@@ -29,8 +33,10 @@
 		filteredShows = shows.filter((show: any) => show.name.toLowerCase().includes(inputValue.toLowerCase()));
 	};
 
-	const remove = (show: any) => {
-		// I need to fix this issue
+	const remove = async (show: any) => {
+	
+	
+		// I need to fix
 		filteredShows = filteredShows.map((allShow: any) =>
 			(allShow.id).toString() == show.id ? { ...allShow, image: { medium: show.image } } : allShow
 		);
