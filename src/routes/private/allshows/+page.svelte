@@ -11,20 +11,26 @@
 	let filteredShows = $state(shows);
 	
 	$effect(() => {
+		filteredShows.map((show: any) => {
+			let isUpdated = false;
 
-			$: userShows;
-			// svelte-ignore state_referenced_locally
-			filteredShows.map((show: any) => {
-				userShows.map((userShow) => {
-					if(userShow.show_id == show.id){
-						show.image = userShow.image
-					}
-				})
-			})
+			userShows.map((userShow) => {
+				if (userShow.show_id == show.id) {
+					show.image = userShow.image; // Updating the image for matching shows
+					isUpdated = true;
+				}
+			});
+
+			// For non-matching shows, check if the image is a string and revert it back to image, because it was removed
+			if (!isUpdated && typeof show.image === "string") {
+				filteredShows = filteredShows.map((allShow: any) =>
+					(allShow.id).toString() == show.id ? { ...allShow, image: { medium: show.image } } : allShow
+				);
+			}
+		});
+
 	
 	})
-		
-
 
 	let inputValue = $state("");
 
@@ -34,8 +40,6 @@
 	};
 
 	const remove = async (show: any) => {
-	
-	
 		// I need to fix
 		filteredShows = filteredShows.map((allShow: any) =>
 			(allShow.id).toString() == show.id ? { ...allShow, image: { medium: show.image } } : allShow

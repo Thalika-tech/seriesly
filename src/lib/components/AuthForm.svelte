@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { ActionData } from '../../routes/register/$types';
 	import Button from './Button/Button.svelte';
+	import Google from '$assets/google.png';
 
 	interface ComponentProps {
 		isRegistration: boolean;
@@ -51,11 +52,10 @@
 		</div>
 
 		<form method="POST" action={isRegistration ? '/login/?/googleLogin' : '?/googleLogin'}>
-			<Button type="submit" isFullWidth={true} isSecondary={true} icon="/src/assets/google.png"
+			<Button type="submit" isFullWidth={true} isSecondary={true} icon={Google}
 				>Login with Google</Button
 			>
 		</form>
-	
 
 		{#if isRegistration}
 			<p class="helper">Already have an account? <a href="/login">Log In</a></p>
