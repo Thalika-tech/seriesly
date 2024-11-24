@@ -2,4 +2,12 @@
 	let { children, data } = $props();
 </script>
 
-{@render children()}
+<div class="layout">
+	{@render children()}
+</div>
+
+<style>
+	.layout {
+		padding: 1vw 4vw;
+	}
+</style>

@@ -48,7 +48,8 @@ export class UserState {
       return;
     }
 
-    this.userShows = data;
+    const newObj = data.map((show) => ({ ...show, fav: true }));
+    this.userShows = newObj;
   }
 
   // Add shows for user
@@ -83,8 +84,6 @@ export class UserState {
     }
 
     const { error } = await this.supabase.from("liked_shows").delete().eq("id", selectedShow.id).eq("user_id", this.user.id);
-
-    console.log("REMOVED");
 
     if (error) {
       console.log("Error removing show");

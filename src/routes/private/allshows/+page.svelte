@@ -16,20 +16,20 @@
 
 			userShows.map((userShow) => {
 				if (userShow.show_id == show.id) {
-					show.image = userShow.image; // Updating the image for matching shows
+					show.fav = true;
 					isUpdated = true;
 				}
 			});
 
-			// For non-matching shows, check if the image is a string and revert it back to image, because it was removed
-			if (!isUpdated && typeof show.image === "string") {
+			if (!isUpdated && show.fav) {
 				filteredShows = filteredShows.map((allShow: any) =>
-					(allShow.id).toString() == show.id ? { ...allShow, image: { medium: show.image } } : allShow
+					(allShow.id).toString() == show.id ? { ...allShow, fav: false } : allShow
 				);
 			}
 		});
 
 	
+		$inspect(filteredShows)
 	})
 
 	let inputValue = $state("");
@@ -38,34 +38,22 @@
 		inputValue = event.target.value;
 		filteredShows = shows.filter((show: any) => show.name.toLowerCase().includes(inputValue.toLowerCase()));
 	};
-
-	const remove = async (show: any) => {
-		// I need to fix
-		filteredShows = filteredShows.map((allShow: any) =>
-			(allShow.id).toString() == show.id ? { ...allShow, image: { medium: show.image } } : allShow
-		);
-	}
-
 </script>
 
-<div class="layout">
-	<div class="title_div">
-		<h1>All Shows</h1> 	
-		<Search inputValue={inputValue} handleChange={handleChange} />
-	</div>
 
-	<div class="grid">
-		{#each filteredShows as show}
-			<Card show={show} remove={remove}/>
-		{/each}
-	</div>
+<div class="title_div">
+	<h1>All Shows</h1> 	
+	<Search inputValue={inputValue} handleChange={handleChange} />
 </div>
 
-<style>
-	.layout {
-		padding: 1vw 4vw;
-	}
+<div class="grid">
+	{#each filteredShows as show}
+		<Card show={show}/>
+	{/each}
+</div>
 
+
+<style>
 	.grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

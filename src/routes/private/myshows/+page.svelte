@@ -8,24 +8,20 @@
 	$inspect(userShows)
 </script>
 
-<div class="layout">
-	<h1 class="title">My Shows</h1>
-		<div class="grid">
-			{#if userShows.length > 0}
-				{#each userShows as show}
-					<Card show={show} />
-				{/each}
 
-			{:else}
-				<p>No Shows Added</p>
-			{/if}
-		</div>
+<h1 class="title">My Shows</h1>
+<div class="grid">
+	{#if userShows.length > 0}
+		{#each userShows as show}
+			<Card show={show} />
+		{/each}
+
+	{:else}
+		<p>No Shows Added</p>
+	{/if}
 </div>
 
 <style>
-	.layout {
-		padding: 1vw 4vw;
-	}
 
 	.grid {
 		display: grid;
