@@ -8,8 +8,23 @@
 
 	let { data } = $props(); 
 	let { shows } = data;  
-	let filteredShows = $state(shows);
 	
+	let filteredShows = $state(shows);
+	let allGenres: string[] = [];
+	let selectedGenre = $state("All");
+
+	// svelte-ignore state_referenced_locally
+	filteredShows.map((show: any) => {
+		show.genres.forEach((genre: string) => {
+			if (!allGenres.includes(genre)) {
+				allGenres.push(genre);
+			}
+		})
+	});
+
+	allGenres.sort((a, b) => a.localeCompare(b));
+	allGenres.unshift("All");
+
 	$effect(() => {
 		filteredShows.map((show: any) => {
 			let isUpdated = false;
@@ -27,9 +42,6 @@
 				);
 			}
 		});
-
-	
-		$inspect(filteredShows)
 	})
 
 	let inputValue = $state("");
@@ -38,12 +50,33 @@
 		inputValue = event.target.value;
 		filteredShows = shows.filter((show: any) => show.name.toLowerCase().includes(inputValue.toLowerCase()));
 	};
+
+	$inspect(filteredShows)
+	$inspect(allGenres)
+
+	const changeGenre = (genre: string) => {
+		selectedGenre = genre;
+
+		if(genre === "All"){
+			filteredShows = shows;
+		}else{
+			filteredShows = shows.filter((show: any) => show.genres.includes(genre));
+		}
+	}
 </script>
 
 
 <div class="title_div">
 	<h1>All Shows</h1> 	
 	<Search inputValue={inputValue} handleChange={handleChange} />
+</div>
+
+<div class="genre_div">
+	{#each allGenres.slice(0, 10) as genre}
+		<button onclick={() => changeGenre(genre)} class="filter" class:selectedGenre={selectedGenre === genre} >{genre}</button>
+	{/each}
+
+	<!-- <button>Filter</button> -->
 </div>
 
 <div class="grid">
@@ -64,5 +97,29 @@
 	.title_div {
 		display: flex;
 		margin-bottom: 32px;
+	}
+
+	.genre_div{
+		display: flex;
+		overflow-x: hidden;
+		margin-bottom: 32px;
+		
+	}
+
+	.filter{
+		font-size: 20px;
+		margin: 0px 24px 16px 0px;
+		white-space: nowrap;
+	}
+
+	.selectedGenre{
+		font-weight: bold;
+	}
+
+	button {
+		background-color: transparent;
+		border: none;
+		color: white;
+		cursor: pointer;
 	}
 </style>

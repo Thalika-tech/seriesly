@@ -8,6 +8,6 @@
 
 <style>
 	.layout {
-		padding: 1vw 4vw;
+		padding: 1vw 4vw 2vw 4vw;
 	}
 </style>

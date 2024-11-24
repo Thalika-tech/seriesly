@@ -7,13 +7,18 @@
 
 	let userContext = getUserState();
 
-	let currentUrl = $page.url.href;
+	let currentUrl = $state($page.url.href);
 	let activePage = $state(currentUrl.slice(currentUrl.lastIndexOf("/")+1, currentUrl.length))
+
+	$effect(() => {
+		activePage = currentUrl.slice(currentUrl.lastIndexOf("/")+1, currentUrl.length)
+	})
 
 	const changeTab = (value: string) => {
 		activePage = value;
 		goto(`/private/${value}`);
 	}
+
 </script>
 
 <nav>

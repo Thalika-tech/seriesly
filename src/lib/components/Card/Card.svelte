@@ -28,6 +28,9 @@
 		width: 200px;
 		border-radius: 8px;
 		height: 100%;
+		&:hover{
+			transform: scale(1.02);
+		}
 	}
 
 	.title_div {

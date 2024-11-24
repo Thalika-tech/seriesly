@@ -13,6 +13,7 @@
   let userContext = getUserState();
   let { userShows } = $derived(userContext);
 
+
   $effect(() => {
     let isUpdated = false;
 
@@ -27,6 +28,8 @@
       showData.fav = false;
 		}
 	})
+
+  $inspect(showData)
 </script>
 
 
@@ -46,7 +49,9 @@
    
     <p class="summary">{showData.summary.replace("<p>", "").replace("</p>", "")}</p>
     
-    <p>Watch Now</p>
+    <!-- <p>Watch Now</p> -->
+
+    <p class="rating">Rating: {showData.rating.average}</p>
   </div>
 </div>
 
@@ -69,5 +74,9 @@
   .summary{
     margin: 24px 0px;
     font-size: 20px;
+  }
+
+  .rating{
+    font-size: 24px;
   }
 </style>

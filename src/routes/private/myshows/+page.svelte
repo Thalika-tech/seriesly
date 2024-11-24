@@ -10,17 +10,16 @@
 
 
 <h1 class="title">My Shows</h1>
-<div class="grid">
 	{#if userShows.length > 0}
-		{#each userShows as show}
-			<Card show={show} />
-		{/each}
-
+		<div class="grid">
+			{#each userShows as show}
+				<Card show={show} />
+			{/each}
+		</div>
 	{:else}
-		<p>No Shows Added</p>
+		<h1 class="none_title">There’s nothing here... yet!</h1>
+		<p>Explore and add shows to build your collection <a href="/private/allshows">now!</a></p>
 	{/if}
-</div>
-
 <style>
 
 	.grid {
@@ -36,5 +35,14 @@
 
 	p {
 		font-size: 24px;
+	}
+
+	.none_title {
+		font-size: 40px;
+		margin: 8px 0px
+	}
+
+	a {
+		color: #007AFF;
 	}
 </style>
