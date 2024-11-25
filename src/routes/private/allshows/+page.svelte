@@ -51,9 +51,6 @@
 		filteredShows = shows.filter((show: any) => show.name.toLowerCase().includes(inputValue.toLowerCase()));
 	};
 
-	$inspect(filteredShows)
-	$inspect(allGenres)
-
 	const changeGenre = (genre: string) => {
 		selectedGenre = genre;
 
