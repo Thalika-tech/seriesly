@@ -17,8 +17,8 @@
 			{/each}
 		</div>
 	{:else}
-		<h1 class="none_title">There’s nothing here... yet!</h1>
-		<p>Explore and add shows to build your collection <a href="/private/allshows">now!</a></p>
+		<h1 class="none_title">Welcome to Seriesly!</h1>
+		<p>Start exploring and add your favorite shows to make it your own. <a href="/private/allshows">Let’s get started!</a></p>
 	{/if}
 <style>
 
