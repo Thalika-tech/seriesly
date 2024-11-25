@@ -40,6 +40,10 @@ export const actions = {
       returnObject.errors.push("Password is required.");
     }
 
+    if (password.length < 6) {
+      returnObject.errors.push("Password is too short. Must be at lease 6 characters.");
+    }
+
     if (password !== passwordConfirmation) {
       returnObject.errors.push("Password do not match.");
     }
@@ -57,6 +61,7 @@ export const actions = {
 
     if (error || !data.user) {
       returnObject.success = false;
+      returnObject.errors.push("User already exists!");
       return fail(400, returnObject as any);
     }
 
