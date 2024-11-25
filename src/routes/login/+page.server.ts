@@ -46,6 +46,7 @@ export const actions = {
 
     if (error || !data.user) {
       returnObject.success = false;
+      returnObject.errors.push("Email or Password is incorrect.");
       return fail(400, returnObject as any);
     }
 
