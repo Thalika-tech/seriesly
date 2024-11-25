@@ -47,11 +47,11 @@
       <LikeBtn condition={showData.fav} show={showData} size="32"/>
     </div>
    
-    <p class="summary">{showData.summary.replace("<p>", "").replace("</p>", "")}</p>
+    <p class="summary">{showData.summary.replace("<p>", "").replace("</p>", "").replace("<b>", "").replace("</b>", "")}</p>
     
     <!-- <p>Watch Now</p> -->
 
-    <p class="rating">Rating: {showData.rating.average}</p>
+    <p class="rating">Rating: {showData.rating.average}/10</p>
   </div>
 </div>
 
